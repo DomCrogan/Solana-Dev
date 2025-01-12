@@ -1,0 +1,294 @@
+Day 2:
+
+Set up environment:
+
+Install Rust - https://www.rust-lang.org/tools/install
+Install the Solana CLI - https://solana.com/docs/intro/installation
+Install Yarn - https://classic.yarnpkg.com/en/docs/install#windows-stable
+Install Node.js - https://nodejs.org/en/download/
+
+Step 1: Install Rust using rustup
+Open Terminal.
+Run this command to download and install rustup (the Rust installer):
+sh
+Copy code
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+
+Follow the on-screen instructions.
+
+Step 2: Configure Your Environment
+After the installation:
+Restart your terminal or run:
+sh
+Copy code
+source $HOME/.cargo/env
+This ensures the Rust tools (rustc, cargo, etc.) are available in your PATH.
+
+Step 3: Verify the Installation
+Check that Rust is installed by running:
+sh
+Copy code
+rustc --version
+
+You should see the installed version, e.g., rustc 1.x.x.
+Step 1: Install Solana CLI
+Open your Terminal.
+Run the following command to install the latest version of the Solana CLI:
+sh
+Copy code
+sh -c "$(curl -sSfL https://release.anza.xyz/stable/install)"
+
+
+
+Step 2: Add Solana CLI to PATH
+After installation, you need to ensure the Solana CLI is accessible in your terminal:
+Add the Solana CLI to your PATH by running:
+sh
+Copy code
+export PATH="/Users/$USER/.local/share/solana/install/active_release/bin:$PATH"
+
+
+To make this change permanent, add the export line to your shell configuration file:
+For zsh (default on macOS): Edit ~/.zshrc
+sh
+Copy code
+echo 'export PATH="/Users/$USER/.local/share/solana/install/active_release/bin:$PATH"' >> ~/.zshrc
+
+
+For bash: Edit ~/.bash_profile
+sh
+Copy code
+echo 'export PATH="/Users/$USER/.local/share/solana/install/active_release/bin:$PATH"' >> ~/.bash_profile
+
+
+After editing, reload the file:
+sh
+Copy code
+source ~/.zshrc  # or `source ~/.bash_profile` for bash
+
+
+
+Step 3: Verify Installation
+Run the following command to check if the Solana CLI is installed and working:
+sh
+Copy code
+solana --version
+
+You should see the installed version, e.g., solana-cli 1.x.x.
+Step 1: Install Prerequisites
+Install Rust
+Since you've already installed Rust, you're good to go!
+Install Node.js and npm
+If you don't have Node.js installed, you can use nvm (Node Version Manager) to install it:
+sh
+Copy code
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+source ~/.zshrc  # or ~/.bash_profile if you're using bash
+nvm install --lts
+After installation, verify Node.js and npm:
+sh
+Copy code
+node -v
+npm -v
+
+
+Install Yarn
+Anchor requires Yarn for package management. Install it via npm:
+sh
+Copy code
+npm install -g yarn
+
+
+Install Solana CLI
+You’ve already installed the Solana CLI, so you’re ready to proceed!
+
+Step 2: Install Anchor
+Run the following command to install the Anchor CLI:
+sh
+Copy code
+cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+
+
+Step 3: Verify Installation
+After installation, verify that the Anchor CLI is installed:
+sh
+Copy code
+anchor --version
+
+You should see something like anchor-cli x.x.x.
+
+Step 4: Configure Anchor
+To configure Anchor for Solana development:
+Set the Solana CLI's configuration to the devnet (or testnet):
+sh
+Copy code
+solana config set --url https://api.devnet.solana.com
+
+
+Confirm the configuration:
+sh
+Copy code
+solana config get
+
+
+
+Optional: Update Anchor
+To update Anchor to the latest version:
+sh
+Copy code
+cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+
+
+
+In visual Studio Code, to close a folder/project, open Visual Studio Code, go to the MacOS bar, click file, and close file.
+solana-keygen new - this creates a new wallet in the Solana CLI
+solana config get - this checks that Solana CLI is currently configured to
+solana config set --url localhost - this configs to your localhost, later we will change to devnet etc for testing
+solana-test-validator - this setups the test validator
+Leave this running, and open a new terminal because we want to leave the validator running
+Inside your new wallet you can check things like:
+solana balance - this checks your balance
+Solana airdrop 1000 - this gives you any amount of solana (i put 1000 as a test, it could be anything) - bare in mind this is because its your local machine, for the devnet it is max 2 SOL per day
+anchor init projectname - this creates a new project at whatever name you want
+cd /projectname - this just changes directy to that folder so you can work in it
+anchor build - gives us some boilerplate code
+Quick Guide: Setting Up a Solana Development Environment with Rust
+
+Step 1: Install Rust
+Install Rust using rustup:
+sh
+Copy code
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
+
+
+Install nightly Rust (required for Solana development):
+sh
+Copy code
+rustup install nightly
+rustup default nightly
+rustup component add rust-src
+
+
+
+Step 2: Install Solana CLI
+Install the Solana CLI:
+sh
+Copy code
+sh -c "$(curl -sSfL https://release.anza.xyz/stable/install)"
+
+
+Add the Solana CLI to your PATH:
+sh
+Copy code
+export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"
+echo 'export PATH="$HOME/.local/share/solana/install/active_release/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+
+
+Verify the installation:
+sh
+Copy code
+solana --version
+
+
+
+Step 3: Install Anchor Framework
+Install the Anchor CLI:
+sh
+Copy code
+cargo install --git https://github.com/coral-xyz/anchor --locked --force
+
+
+Verify Anchor installation:
+sh
+Copy code
+anchor --version
+
+
+
+Steps for Starting a New Solana Project
+1. Create a New Anchor Project
+Initialize a new Anchor project:
+sh
+Copy code
+anchor init my-project
+cd my-project
+
+
+Check the folder structure:
+Anchor.toml – Anchor project configuration.
+programs/ – Contains the Rust program code.
+tests/ – JavaScript/TypeScript testing framework.
+
+2. Configure the Local Environment
+Start a local Solana validator:
+sh
+Copy code
+solana-test-validator
+
+
+Configure the Solana CLI to use the local validator:
+sh
+Copy code
+solana config set --url http://127.0.0.1:8899
+
+
+Create a default keypair if one doesn’t exist:
+sh
+Copy code
+solana-keygen new --outfile ~/.config/solana/id.json
+
+
+
+3. Build and Deploy the Program
+Build your program:
+sh
+Copy code
+anchor build
+
+
+Deploy the program to the local validator:
+sh
+Copy code
+anchor deploy
+
+
+
+4. Write Tests
+Write your tests in the tests/ folder (using TypeScript or JavaScript).
+Run the tests:
+sh
+Copy code
+anchor test
+
+
+
+Every Time You Start a New Project
+Start the local validator:
+sh
+Copy code
+solana-test-validator
+
+
+Configure Solana CLI for local development:
+sh
+Copy code
+solana config set --url http://127.0.0.1:8899
+
+
+Initialize a new Anchor project:
+sh
+Copy code
+anchor init my-new-project
+cd my-new-project
+
+
+Build, deploy, and test:
+sh
+Copy code
+anchor build
+anchor deploy
+anchor test
+I was getting an error quite a lot with “anchor build” - it was saying it couldnt find the directory… this fixed it “rm -rf ~/.cache/solana/*”
